@@ -1,0 +1,18 @@
+/* azurecurve plugin index
+----------------------------------------------- */
+a.azrcrv-plugin-index{
+	display: block;
+	float: left;
+	text-align: center;
+	margin: 4px;
+	color: #fff;
+	background: #007FFF;
+	width: 220px;
+	height: 125px;
+	line-height: 125px;
+	text-decoration: none; 
+	font-weight: 700;
+}
+a.azrcrv-plugin-index:hover{
+	text-decoration: underline; 
+}
