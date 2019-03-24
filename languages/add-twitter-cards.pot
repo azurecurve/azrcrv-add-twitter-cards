@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Twitter Cards\n"
+"POT-Creation-Date: 2019-03-24 10:37+0000\n"
+"PO-Revision-Date: 2019-03-24 10:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: https://translate.azurecurve.co.uk/\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: azrcrv-add-twitter-cards.php\n"
+
+#: azrcrv-add-twitter-cards.php:155
+msgid "Settings"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:172
+msgid "Add Twitter Card Settings"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:173
+msgid "Add Twitter Card"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:187
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:198
+msgid "Settings have been saved."
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:209
+msgid "Use floating featured image?"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:211
+msgid "Use floating featured image in Twitter card?"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:215
+msgid "Card Type"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:217
+msgid "Summary"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:218
+msgid "Summary Large Image"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:220
+msgid "Select type of Twitter card."
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:223
+msgid "Twitter Username"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:225
+msgid "Site's Twitter Username"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:228
+msgid "Fallback Image"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:233
+msgid "Upload image"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:234
+msgid "Remove image"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:235
+msgid ""
+"Upload, choose or remove your profile picture; save your profile to add-"
+"twitter-cards the change."
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:238
+msgid "Enable Author Twitter?"
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:240
+msgid ""
+"Enable Author Twitter on user profiles; used to add Content Creator to "
+"Twitter card."
+msgstr ""
+
+#: azrcrv-add-twitter-cards.php:261
+msgid "You do not have permissions to perform this action"
+msgstr ""
