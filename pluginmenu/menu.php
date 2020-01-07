@@ -15,18 +15,22 @@ if (!function_exists('azrcrv_add_plugin_menu')){
 		global $admin_page_hooks;
 		
 		if (empty ($admin_page_hooks['azrcrv-menu-test'])){
-			add_menu_page("azurecurve Plugins"
-							,"azurecurve"
-							,'manage_options'
-							,"azrcrv-plugin-menu"
-							,"azrcrv_plugin_menu"
-							,plugins_url('/pluginmenu/images/Favicon-16x16.png', __DIR__));
-			add_submenu_page("azrcrv-plugin-menu"
-								,"Plugins"
-								,"Plugins"
-								,'manage_options'
-								,"azrcrv-plugin-menu"
-								,"azrcrv_plugin_menu");
+			add_menu_page(
+				'azurecurve Plugins',
+				'azurecurve',
+				'manage_options',
+				'azrcrv-plugin-menu',
+				'azrcrv_plugin_menu',
+				plugins_url('/pluginmenu/images/Favicon-16x16.png', __DIR__)
+			);
+			add_submenu_page(
+				'azrcrv-plugin-menu',
+				'Plugins',
+				'Plugins',
+				'manage_options',
+				'azrcrv-plugin-menu',
+				'azrcrv_plugin_menu'
+			);
 		}
 	}
 }
@@ -43,246 +47,239 @@ if (!function_exists('azrcrv_plugin_menu')){
 		
 		echo "<div style='display: block;'><h3>Active Plugins</h3>";
 		echo "<span class='azrcrv-plugin-index'>";
-		if (is_plugin_active('azrcrv-add-twitter-cards/azrcrv-add-twitter-cards.php')){
-			echo "<a href='admin.php?page=azrcrv-atc' class='azrcrv-plugin-index'>Add Twitter Cards</a>";
+
+		$plugin_array = array(
+			array(
+				'plugin_link' => 'azrcrv-add-twitter-cards/azrcrv-add-twitter-cards.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-atc',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/',
+				'text' => 'Add Twitter Cards'
+			),
+			array(
+				'plugin_link' => 'azrcrv-avatars/azrcrv-avatars.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-a',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/avatars/',
+				'text' => 'Avatars'
+			),
+			array(
+				'plugin_link' => 'azrcrv-bbcode/azrcrv-bbcode.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-bbc',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/bbcode/',
+				'text' => 'BBCode'
+			),
+			array(
+				'plugin_link' => 'azrcrv-breadcrumbs/azrcrv-breadcrumbs.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-b',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/breadcrumbs/',
+				'text' => 'Breadcrumbs'
+			),
+			array(
+				'plugin_link' => 'azrcrv-call-out-boxes/azrcrv-call-out-boxes.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-cob',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/call-out-boxes/',
+				'text' => 'Call-out Boxes'
+			),
+			array(
+				'plugin_link' => 'azrcrv-code/azrcrv-code.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-c',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/code/',
+				'text' => 'Code'
+			),
+			array(
+				'plugin_link' => 'azrcrv-comment-validator/azrcrv-comment-validator.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-cv',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/comment-validator/',
+				'text' => 'Comment Validator'
+			),
+			array(
+				'plugin_link' => 'azrcrv-conditional-links/azrcrv-conditional-links.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-cl',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/conditional-links/',
+				'text' => 'Conditional Links'
+			),
+			array(
+				'plugin_link' => 'azrcrv-display-after-post-content/azrcrv-display-after-post-content.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-dapc',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/display-after-post-content/',
+				'text' => 'Display After Post Content'
+			),
+			array(
+				'plugin_link' => 'azrcrv-filtered-categories/azrcrv-filtered-categories.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-fc',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/filtered-categories/',
+				'text' => 'Filtered Categories'
+			),
+			array(
+				'plugin_link' => 'azrcrv-flags/azrcrv-flags.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-f',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/flags/',
+				'text' => 'Flags'
+			),
+			array(
+				'plugin_link' => 'azrcrv-floating-featured-image/azrcrv-floating-featured-image.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-ffi',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/',
+				'text' => 'Floating Featured Image'
+			),
+			array(
+				'plugin_link' => 'azrcrv-icons/azrcrv-icons.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-i',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/icons/',
+				'text' => 'Icons'
+			),
+			array(
+				'plugin_link' => 'azrcrv-images/azrcrv-images.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-im',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/images/',
+				'text' => 'Images'
+			),
+			array(
+				'plugin_link' => 'azrcrv-insult-generator/azrcrv-insult-generator.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-ig',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/insult-generator/',
+				'text' => 'Insult Generator'
+			),
+			array(
+				'plugin_link' => 'azrcrv-loop-injection/azrcrv-loop-injection.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-li',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/loop-injection/',
+				'text' => 'Loop Injection'
+			),
+			array(
+				'plugin_link' => 'azrcrv-mobile-detection/azrcrv-mobile-detection.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-md',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/mobile-detection/',
+				'text' => 'Mobile Detection'
+			),
+			array(
+				'plugin_link' => 'azrcrv-multisite-favicon/azrcrv-multisite-favicon.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-msf',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/multisite-favicon/',
+				'text' => 'Multisite Favicon'
+			),
+			array(
+				'plugin_link' => 'azrcrv-page-index/azrcrv-page-index.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-pi',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/page-index/',
+				'text' => 'Page Index'
+			),
+			array(
+				'plugin_link' => 'azrcrv-post-archive/azrcrv-post-archive.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-pa',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/post-archive/',
+				'text' => 'Post Archive'
+			),
+			array(
+				'plugin_link' => 'azrcrv-rss-feed/azrcrv-rss-feed.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-rssf',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/rss-feed/',
+				'text' => 'RSS Feed'
+			),
+			array(
+				'plugin_link' => 'azrcrv-rss-suffix/azrcrv-rss-suffix.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-rsss',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/rss-suffix/',
+				'text' => 'RSS Suffix'
+			),
+			array(
+				'plugin_link' => 'azrcrv-series-index/azrcrv-series-index.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-si',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/series-index/',
+				'text' => 'Series Index'
+			),
+			array(
+				'plugin_link' => 'azrcrv-shortcodes-in-comments/azrcrv-shortcodes-in-comments.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-sic',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-comments/',
+				'text' => 'Shortcodes in Comments'
+			),
+			array(
+				'plugin_link' => 'azrcrv-shortcodes-in-widgets/azrcrv-shortcodes-in-widgets.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-siw',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-widgets/',
+				'text' => 'Shortcodes in Widgets'
+			),
+			array(
+				'plugin_link' => 'azrcrv-sidebar-login/azrcrv-sidebar-login.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-sl',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/sidebar-login/',
+				'text' => 'Sidebar Login'
+			),
+			array(
+				'plugin_link' => 'azrcrv-snippets/azrcrv-snippets.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-s',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/snippets/',
+				'text' => 'Snippets'
+			),
+			array(
+				'plugin_link' => 'azrcrv-social-sharing/azrcrv-social-sharing.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-ss',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/social-sharing/',
+				'text' => 'Social Sharing'
+			),
+			array(
+				'plugin_link' => 'azrcrv-tag-cloud/azrcrv-tag-cloud.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-tc',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/tag-cloud/',
+				'text' => 'Tag Cloud'
+			),
+			array(
+				'plugin_link' => 'azrcrv-taxonomy-index/azrcrv-taxonomy-index.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-ti',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/taxonomy-index/',
+				'text' => 'Taxonomy Index'
+			),
+			array(
+				'plugin_link' => 'azrcrv-theme-switcher/azrcrv-theme-switcher.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-ts',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/theme-switcher/',
+				'text' => 'Theme Switcher'
+			),
+			array(
+				'plugin_link' => 'azrcrv-timelines/azrcrv-timelines.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-t',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/timelines/',
+				'text' => 'Timelines'
+			),
+			array(
+				'plugin_link' => 'azrcrv-toggle-showhide/azrcrv-toggle-showhide.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-tsh',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/toggle-showhide/',
+				'text' => 'Toggle Show/Hide'
+			),
+			array(
+				'plugin_link' => 'azrcrv-url-shortener/azrcrv-url-shortener.php',
+				'admin_URL'=> 'admin.php?page=azrcrv-urls',
+				'dev_URL'=> 'https://development.azurecurve.co.uk/classicpress-plugins/url-shortener/',
+				'text' => 'URL Shortener'
+			),
+		);
+
+		foreach($plugin_array as $plugin_details) {
+			if (is_plugin_active($plugin_details['plugin_link'])){
+				echo '<a href="' . $plugin_details['admin_URL'] . '" class="azrcrv-plugin-index">' . $plugin_details['text'] . '</a>';
+			}
 		}
-		if (is_plugin_active('azrcrv-avatars/azrcrv-avatars.php')){
-			echo "<a href='admin.php?page=azrcrv-a' class='azrcrv-plugin-index'>Avatars</a>";
-		}
-		if (is_plugin_active('azrcrv-bbcode/azrcrv-bbcode.php')){
-			echo "<a href='admin.php?page=azrcrv-bbc' class='azrcrv-plugin-index'>BBCode</a>";
-		}
-		if (is_plugin_active('azrcrv-breadcrumbs/azrcrv-breadcrumbs.php')){
-			echo "<a href='admin.php?page=azrcrv-b' class='azrcrv-plugin-index'>Breadcrumbs</a>";
-		}
-		if (is_plugin_active('azrcrv-call-out-boxes/azrcrv-call-out-boxes.php')){
-			echo "<a href='admin.php?page=azrcrv-cob' class='azrcrv-plugin-index'>Call-out Boxes</a>";
-		}
-		if (is_plugin_active('azrcrv-code/azrcrv-code.php')){
-			echo "<a href='admin.php?page=azrcrv-c' class='azrcrv-plugin-index'>Code</a>";
-		}
-		if (is_plugin_active('azrcrv-comment-validator/azrcrv-comment-validator.php')){
-			echo "<a href='admin.php?page=azrcrv-cv' class='azrcrv-plugin-index'>Comment Validator</a>";
-		}
-		if (is_plugin_active('azrcrv-conditional-links/azrcrv-conditional-links.php')){
-			echo "<a href='admin.php?page=azrcrv-cl' class='azrcrv-plugin-index'>Conditional Links</a>";
-		}
-		if (is_plugin_active('azrcrv-display-after-post-content/azrcrv-display-after-post-content.php')){
-			echo "<a href='admin.php?page=azrcrv-dapc' class='azrcrv-plugin-index'>Display After Post Content</a>";
-		}
-		if (is_plugin_active('azrcrv-filtered-categories/azrcrv-filtered-categories.php')){
-			echo "<a href='admin.php?page=azrcrv-fc' class='azrcrv-plugin-index'>Filtered Categories</a>";
-		}
-		if (is_plugin_active('azrcrv-flags/azrcrv-flags.php')){
-			echo "<a href='admin.php?page=azrcrv-f' class='azrcrv-plugin-index'>Flags</a>";
-		}
-		if (is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php')){
-			echo "<a href='admin.php?page=azrcrv-ffi' class='azrcrv-plugin-index'>Floating Featured Image</a>";
-		}
-		if (is_plugin_active('azrcrv-icons/azrcrv-icons.php')){
-			echo "<a href='admin.php?page=azrcrv-i' class='azrcrv-plugin-index'>Icons</a>";
-		}
-		if (is_plugin_active('azrcrv-images/azrcrv-images.php')){
-			echo "<a href='admin.php?page=azrcrv-im' class='azrcrv-plugin-index'>Images</a>";
-		}
-		if (is_plugin_active('azrcrv-insult-generator/azrcrv-insult-generator.php')){
-			echo "<a href='admin.php?page=azrcrv-ig' class='azrcrv-plugin-index'>Insult Generator</a>";
-		}
-		if (is_plugin_active('azrcrv-loop-advert-injection/azrcrv-loop-advert-injection.php')){
-			echo "<a href='admin.php?page=azrcrv-lai' class='azrcrv-plugin-index'>Loop Advert Injection</a>";
-		}
-		if (is_plugin_active('azrcrv-mobile-detection/azrcrv-mobile-detection.php')){
-			echo "<a href='admin.php?page=azrcrv-md' class='azrcrv-plugin-index'>Mobile Detection</a>";
-		}
-		if (is_plugin_active('azrcrv-multisite-favicon/azrcrv-multisite-favicon.php')){
-			echo "<a href='admin.php?page=azrcrv-msf' class='azrcrv-plugin-index'>Multisite Favicon</a>";
-		}
-		if (is_plugin_active('azrcrv-page-index/azrcrv-page-index.php')){
-			echo "<a href='admin.php?page=azrcrv-pi' class='azrcrv-plugin-index'>Page Index</a>";
-		}
-		if (is_plugin_active('azrcrv-post-archive/azrcrv-post-archive.php')){
-			echo "<a href='admin.php?page=azrcrv-pa' class='azrcrv-plugin-index'>Post Archive</a>";
-		}
-		if (is_plugin_active('azrcrv-rss-feed/azrcrv-rss-feed.php')){
-			echo "<a href='admin.php?page=azrcrv-rssf' class='azrcrv-plugin-index'>RSS Feed</a>";
-		}
-		if (is_plugin_active('azrcrv-rss-suffix/azrcrv-rss-suffix.php')){
-			echo "<a href='admin.php?page=azrcrv-rsss' class='azrcrv-plugin-index'>RSS Suffix</a>";
-		}
-		if (is_plugin_active('azrcrv-series-index/azrcrv-series-index.php')){
-			echo "<a href='admin.php?page=azrcrv-si' class='azrcrv-plugin-index'>Series Index</a>";
-		}
-		if (is_plugin_active('azrcrv-shortcodes-in-comments/azrcrv-shortcodes-in-comments.php')){
-			echo "<a href='admin.php?page=azrcrv-sic' class='azrcrv-plugin-index'>Shortcodes in Comments</a>";
-		}
-		if (is_plugin_active('azrcrv-shortcodes-in-widgets/azrcrv-shortcodes-in-widgets.php')){
-			echo "<a href='admin.php?page=azrcrv-siw' class='azrcrv-plugin-index'>Shortcodes in Widgets</a>";
-		}
-		if (is_plugin_active('azrcrv-sidebar-login/azrcrv-sidebar-login.php')){
-			echo "<a href='admin.php?page=azrcrv-sl' class='azrcrv-plugin-index'>Sidebar Login</a>";
-		}
-		if (is_plugin_active('azrcrv-snippets/azrcrv-snippets.php')){
-			echo "<a href='admin.php?page=azrcrv-s' class='azrcrv-plugin-index'>Snippets</a>";
-		}
-		if (is_plugin_active('azrcrv-tag-cloud/azrcrv-tag-cloud.php')){
-			echo "<a href='admin.php?page=azrcrv-tc' class='azrcrv-plugin-index'>Tag Cloud</a>";
-		}
-		if (is_plugin_active('azrcrv-taxonomy-index/azrcrv-taxonomy-index.php')){
-			echo "<a href='admin.php?page=azrcrv-ti' class='azrcrv-plugin-index'>Taxonomy Index</a>";
-		}
-		if (is_plugin_active('azrcrv-theme-switcher/azrcrv-theme-switcher.php')){
-			echo "<a href='admin.php?page=azrcrv-ts' class='azrcrv-plugin-index'>Theme Switcher</a>";
-		}
-		if (is_plugin_active('azrcrv-timelines/azrcrv-timelines.php')){
-			echo "<a href='admin.php?page=azrcrv-t' class='azrcrv-plugin-index'>Timelines</a>";
-		}
-		if (is_plugin_active('azrcrv-toggle-showhide/azrcrv-toggle-showhide.php')){
-			echo "<a href='admin.php?page=azrcrv-tsh' class='azrcrv-plugin-index'>Toggle Show/Hide</a>";
-		}
-		if (is_plugin_active('azrcrv-url-shortener/azrcrv-url-shortener.php')){
-			echo "<a href='admin.php?page=azrcrv-urls' class='azrcrv-plugin-index'>URL Shortener</a>";
-		}
+		
 		echo "</span></div>";
 		echo "<p style='clear: both' />";
 		
 		echo "<div style='display: block;'><h3>Other Available Plugins</h3>";
 		echo "<span class='azrcrv-plugin-index'>";
+
 		$countofplugins = 0;
-		if (!is_plugin_active('azrcrv-add-twitter-cards/azrcrv-add-twitter-cards.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/' class='azrcrv-plugin-index'>Add Twitter Cards</a>";
-			$countofplugins += 1;
+
+		foreach($plugin_array as $pluginItem) {
+			if (!is_plugin_active($pluginItem['plugin_link'])){
+				echo '<a href="' . $pluginItem['dev_URL'] . '" class="azrcrv-plugin-index">' . $pluginItem['text'] . '</a>';
+				$countofplugins += 1;
+			}
 		}
-		if (!is_plugin_active('azrcrv-avatars/azrcrv-avatars.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/avatars/' class='azrcrv-plugin-index'>Avatars</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-bbcode/azrcrv-bbcode.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/bbcode/' class='azrcrv-plugin-index'>BBCode</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-breadcrumbs/azrcrv-breadcrumbs.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/breadcrumbs/' class='azrcrv-plugin-index'>Breadcrumbs</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-code/azrcrv-code.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/code/' class='azrcrv-plugin-index'>Code</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-call-out-boxes/azrcrv-call-out-boxes.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/call-out-boxes/' class='azrcrv-plugin-index'>Call-out Boxes</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-comment-validator/azrcrv-comment-validator.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/comment-validator/' class='azrcrv-plugin-index'>Comment Validator</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-conditional-links/azrcrv-conditional-links.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/conditional-links/' class='azrcrv-plugin-index'>Conditional Links</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-display-after-post-content/azrcrv-display-after-post-content.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/display-after-post-content/' class='azrcrv-plugin-index'>Display After Post Content</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-filtered-categories/azrcrv-filtered-categories.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/filtered-categories/' class='azrcrv-plugin-index'>Filtered Categories</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-flags/azrcrv-flags.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/flags/' class='azrcrv-plugin-index'>Flags</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/' class='azrcrv-plugin-index'>Floating Featured Image</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-icons/azrcrv-icons.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/icons/' class='azrcrv-plugin-index'>Icons</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-images/azrcrv-images.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/images/' class='azrcrv-plugin-index'>Images</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-insult-generator/azrcrv-insult-generator.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/insult-generator/' class='azrcrv-plugin-index'>Insult Generator</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-loop-advert-injection/azrcrv-loop-advert-injection.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/loop-advert-injection/' class='azrcrv-plugin-index'>Loop Advert Injection</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-mobile-detection/azrcrv-mobile-detection.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/mobile-detection/' class='azrcrv-plugin-index'>Mobile Detection</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-multisite-favicon/azrcrv-multisite-favicon.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/multisite-favicon/' class='azrcrv-plugin-index'>Multisite Favicon</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-page-index/azrcrv-page-index.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/page-index/' class='azrcrv-plugin-index'>Page Index</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-post-archive/azrcrv-post-archive.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/post-archive/' class='azrcrv-plugin-index'>Post Archive</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-rss-feed/azrcrv-rss-feed.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/rss-feed/' class='azrcrv-plugin-index'>RSS Feed</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-rss-suffix/azrcrv-rss-suffix.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/rss-suffix/' class='azrcrv-plugin-index'>RSS Suffix</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-series-index/azrcrv-series-index.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/series-index/' class='azrcrv-plugin-index'>Series Index</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-shortcodes-in-comments/azrcrv-shortcodes-in-comments.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-comments/' class='azrcrv-plugin-index'>Shortcodes in Comments</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-shortcodes-in-widgets/azrcrv-shortcodes-in-widgets.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-widgets/' class='azrcrv-plugin-index'>Shortcodes in Widgets</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-sidebar-login/azrcrv-sidebar-login.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/sidebar-login/' class='azrcrv-plugin-index'>Sidebar Login</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-snippets/azrcrv-snippets.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/snippets/' class='azrcrv-plugin-index'>Snippets</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-tag-cloud/azrcrv-tag-cloud.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/tag-cloud/' class='azrcrv-plugin-index'>Tag Cloud</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-taxonomy-index/azrcrv-taxonomy-index.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/taxonomy-index/' class='azrcrv-plugin-index'>Taxonomy Index</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-theme-switcher/azrcrv-theme-switcher.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/theme-switcher/' class='azrcrv-plugin-index'>Theme Switcher</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-timelines/azrcrv-timelines.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/timelines/' class='azrcrv-plugin-index'>Timelines</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-toggle-showhide/azrcrv-toggle-showhide.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/toggle-showhide/' class='azrcrv-plugin-index'>Toggle Show/Hide</a>";
-			$countofplugins += 1;
-		}
-		if (!is_plugin_active('azrcrv-url-shortener/azrcrv-url-shortener.php')){
-			echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/url-shortener/' class='azrcrv-plugin-index'>URL Shortener</a>";
-			$countofplugins += 1;
-		}
+		
 		if ($countofplugins == 0){
 			echo "Congratulations! You're using all of the azurecurve plugins.";
 		}
+
 		echo "</span></div>";
 	
 		echo "<p style='clear: both' />";

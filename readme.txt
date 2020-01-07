@@ -31,6 +31,9 @@ To install the Add Twitter Cards plugin:
 
 == Changelog ==
 Changes and feature additions for the Add Twitter Cards plugin:
+= 1.0.1 =
+* Update azurecurve menu for easier maintenance.
+* Move require of azurecurve menu below security check.
 = 1.0.0 =
 * First version. Idea and some code from [Code Potent](https://codepotent.com/).
 
