@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards
@@ -169,8 +169,8 @@ function azrcrv_atc_create_admin_menu(){
 	//global $admin_page_hooks;
 	
 	add_submenu_page("azrcrv-plugin-menu"
-						,esc_html__("Add Twitter Card Settings", 'floating-featured-image')
-						,esc_html__("Add Twitter Card", 'floating-featured-image')
+						,esc_html__("Add Twitter Card Settings", 'add-twitter-cards')
+						,esc_html__("Add Twitter Card", 'add-twitter-cards')
 						,'manage_options'
 						,'azrcrv-atc'
 						,'azrcrv_atc_display_options');
@@ -321,9 +321,6 @@ function azrcrv_atc_is_plugin_active($plugin){
  *
  */
 function azrcrv_atc_insert_twittercard_tags() {
-	if ( ! is_singular() ) {
-		return $image;
-	}
 	
 	// Bring $post object into scope.
 	global $post;
@@ -335,7 +332,10 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$options = get_option('azrcrv-atc');
 	
 	$image_count = 0;
-	if ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
+	if (!is_singular()){
+		$imagetouse = $options['fallback_image'];
+		$image_count = 0;
+	}elseif ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
 		$image_properties = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) , 'medium_large' );
 		$image = $image_properties[0];
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 1){
@@ -345,7 +345,8 @@ function azrcrv_atc_insert_twittercard_tags() {
 	}elseif ($options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == false){
 		$image_count = 1;
 	}else{
-		$image = $options['fallback_image'];
+		$imagetouse = $options['fallback_image'];
+		$image_count = 0;
 		
 	}
 	if (strlen($image) == 0){
