@@ -31,6 +31,8 @@ To install the Add Twitter Cards plugin:
 
 == Changelog ==
 Changes and feature additions for the Add Twitter Cards plugin:
+= 1.0.3 =
+* Fix bug with selection of image.
 = 1.0.2 =
 * Fix bug with Twitter Card on non-singular pages.
 * Fix bug with text domain on addition of menu and rebuild pot.

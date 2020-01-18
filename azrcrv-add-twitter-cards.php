@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards
@@ -337,25 +337,23 @@ function azrcrv_atc_insert_twittercard_tags() {
 		$image_count = 0;
 	}elseif ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
 		$image_properties = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) , 'medium_large' );
-		$image = $image_properties[0];
+		$imagetouse = $image_properties[0];
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 1){
 		$image_count = 1;
-	}elseif ($options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == true){
+	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == true){
 		$image_count = 2;
 	}elseif ($options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == false){
 		$image_count = 1;
 	}else{
-		$imagetouse = $options['fallback_image'];
-		$image_count = 0;
-		
+		$image_count = 1;
 	}
-	if (strlen($image) == 0){
+	if ($image_count == 0 AND STRLEN($imagetouse) == 0){
 		$imagetouse = $options['fallback_image'];
 	}
 	
 	if ($image_count > 0){
 		$counter = 0;
-		if ( preg_match_all( '`<img [^>]+>`',  do_shortcode($post->post_content), $matches ) ) {
+		if ( preg_match_all( '/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s',  do_shortcode($post->post_content), $matches ) ) {
 			$_matches = reset( $matches );
 			foreach ( $_matches as $image ) {
 				$counter += 1;
