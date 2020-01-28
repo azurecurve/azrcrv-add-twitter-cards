@@ -1,3 +1,2 @@
 <?php
-// nothing to see here
-?>
+// Whereof one cannot speak, thereof one must be silent.

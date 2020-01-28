@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.0.3
+ * Version: 1.1.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards
@@ -24,6 +24,10 @@ if (!defined('ABSPATH')){
 
 // include plugin menu
 require_once(dirname(__FILE__).'/pluginmenu/menu.php');
+register_activation_hook(__FILE__, 'azrcrv_create_plugin_menu_atc');
+
+// include update client
+require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php');
 
 /**
  * Setup registration activation hook, actions, filters and shortcodes.
@@ -40,9 +44,21 @@ add_action('admin_post_azrcrv_atc_save_options', 'azrcrv_atc_save_options');
 add_action('admin_enqueue_scripts', 'azrcrv_atc_load_jquery');
 add_action('admin_enqueue_scripts', 'azrcrv_atc_media_uploader');
 add_action( 'wp_head', 'azrcrv_atc_insert_twittercard_tags', 0 );
+add_action('plugins_loaded', 'azrcrv_atc_load_languages');
 
 // add filters
 add_filter('plugin_action_links', 'azrcrv_atc_add_plugin_action_link', 10, 2);
+
+/**
+ * Load language files.
+ *
+ * @since 1.0.0
+ *
+ */
+function azrcrv_atc_load_languages() {
+    $plugin_rel_path = basename(dirname(__FILE__)).'/languages';
+    load_plugin_textdomain('azrcrv-atc', false, $plugin_rel_path);
+}
 
 /**
  * Load JQuery.
@@ -192,7 +208,7 @@ function azrcrv_atc_display_options(){
 	?>
 	<div id="azrcrv-atc-general" class="wrap">
 		<fieldset>
-			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+			<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 			<?php if(isset($_GET['settings-updated'])){ ?>
 				<div class="notice notice-success is-dismissible">
 					<p><strong><?php esc_html_e('Settings have been saved.', 'add-twitter-cards'); ?></strong></p>
