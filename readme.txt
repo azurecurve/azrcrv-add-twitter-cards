@@ -64,14 +64,14 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
  * Change settings page heading.
  * Add load_plugin_textdomain to handle translations.
 
-### [Version 1.0.3(https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.3)
+### [Version 1.0.3](https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.3)
  * Fix bug with selection of image.
 
-### [Version 1.0.2(https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.2)
+### [Version 1.0.2](https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.2)
  * Fix bug with Twitter Card on non-singular pages.
  * Fix bug with text domain on addition of menu and rebuild pot.
 
-### [Version 1.0.1(https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.1)
+### [Version 1.0.1](https://github.com/azurecurve/azrcrv-add-twitter-cards/tree/v1.0.1)
  * Update azurecurve menu for easier maintenance.
  * Move require of azurecurve menu below security check.
 
