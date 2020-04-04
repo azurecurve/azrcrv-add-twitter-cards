@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -97,7 +97,6 @@ function azrcrv_atc_load_jquery($hook){
 function azrcrv_atc_set_default_options($networkwide){
 	
 	$option_name = 'azrcrv-atc';
-	$old_option_name = 'azc_azrcrv_atc_options';
 	
 	$new_options = array(
 						'' => '',
@@ -114,46 +113,66 @@ function azrcrv_atc_set_default_options($networkwide){
 
 			foreach ($blog_ids as $blog_id){
 				switch_to_blog($blog_id);
-
-				if (get_option($option_name) === false){
-					if (get_option($old_option_name) === false){
-						add_option($option_name, $new_options);
-					}else{
-						add_option($option_name, get_option($old_option_name));
-					}
-				}
+				
+				azrcrv_atc_update_options($option_name, $new_options, false);
 			}
 
 			switch_to_blog($original_blog_id);
 		}else{
-			if (get_option($option_name) === false){
-				if (get_option($old_option_name) === false){
-					add_option($option_name, $new_options);
-				}else{
-					add_option($option_name, get_option($old_option_name));
-				}
-			}
+			azrcrv_atc_update_options( $option_name, $new_options, false);
 		}
 		if (get_site_option($option_name) === false){
-				if (get_option($old_option_name) === false){
-					add_option($option_name, $new_options);
-				}else{
-					add_option($option_name, get_option($old_option_name));
-				}
+			azrcrv_atc_update_options($option_name, $new_options, true);
 		}
 	}
 	//set defaults for single site
 	else{
+		azrcrv_atc_update_options($option_name, $new_options, false);
+	}
+}
+
+/**
+ * Update options.
+ *
+ * @since 1.1.3
+ *
+ */
+function azrcrv_atc_update_options($option_name, $new_options, $is_network_site){
+	if ($is_network_site == true){
+		if (get_site_option($option_name) === false){
+			add_site_option($option_name, $new_options);
+		}else{
+			update_site_option($option_name, azrcrv_atc_update_default_options($new_options, get_site_option($option_name)));
+		}
+	}else{
 		if (get_option($option_name) === false){
-				if (get_option($old_option_name) === false){
-					add_option($option_name, $new_options);
-				}else{
-					add_option($option_name, get_option($old_option_name));
-				}
+			add_option($option_name, $new_options);
+		}else{
+			update_option($option_name, azrcrv_atc_update_default_options($new_options, get_option($option_name)));
 		}
 	}
 }
 
+
+/**
+ * Add default options to existing options.
+ *
+ * @since 1.1.3
+ *
+ */
+function azrcrv_atc_update_default_options( &$default_options, $current_options ) {
+    $default_options = (array) $default_options;
+    $current_options = (array) $current_options;
+    $updated_options = $current_options;
+    foreach ($default_options as $key => &$value) {
+        if (is_array( $value) && isset( $updated_options[$key ])){
+            $updated_options[$key] = azrcrv_atc_update_default_options($value, $updated_options[$key], true);
+        } else {
+            $updated_options[$key] = $value;
+        }
+    }
+    return $updated_options;
+}
 /**
  * Add pluginnameazrcrv-atc action link on plugins page.
  *
@@ -348,12 +367,13 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$options = get_option('azrcrv-atc');
 	
 	$image_count = 0;
+	$imagetouse = '';
 	if (!is_singular()){
 		$imagetouse = $options['fallback_image'];
 		$image_count = 0;
-	}elseif ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
+	/*}elseif ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
 		$image_properties = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) , 'medium_large' );
-		$imagetouse = $image_properties[0];
+		$imagetouse = $image_properties[0];*/
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 1){
 		$image_count = 1;
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == true){
@@ -362,9 +382,6 @@ function azrcrv_atc_insert_twittercard_tags() {
 		$image_count = 1;
 	}else{
 		$image_count = 1;
-	}
-	if ($image_count == 0 AND STRLEN($imagetouse) == 0){
-		$imagetouse = $options['fallback_image'];
 	}
 	
 	if ($image_count > 0){
@@ -381,6 +398,10 @@ function azrcrv_atc_insert_twittercard_tags() {
 				}
 			}
 		}
+	}
+	
+	if (STRLEN($imagetouse) == 0){
+		$imagetouse = $options['fallback_image'];
 	}
 	
 	// If on a post or page, reset defaults.
@@ -414,7 +435,7 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$markup .= '<meta name="twitter:site" content="@'.str_replace( '@', '', esc_html($options['twitter'])).'" />' . "\n";
 	
 	// Add creator tag if author profile has a Twitter username.
-	$twitter = get_usermeta($post->post_author, 'azrcrv_atc_twitter', true);
+	$twitter = get_user_meta($post->post_author, 'azrcrv_atc_twitter', true);
 	if ($card_type == 'summary_large_image' AND $twitter){
 		$markup .= '<meta name="twitter:creator" content="@'.str_replace('@', '', esc_html($twitter)).'" />'."\n";
 	}
