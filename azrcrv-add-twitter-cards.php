@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')){
 
 // include plugin menu
 require_once(dirname(__FILE__).'/pluginmenu/menu.php');
-register_activation_hook(__FILE__, 'azrcrv_create_plugin_menu_atc');
+add_action('admin_init', 'azrcrv_create_plugin_menu_atc');
 
 // include update client
 require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php');
@@ -36,7 +36,7 @@ require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php')
  *
  */
 // add actions
-register_activation_hook(__FILE__, 'azrcrv_atc_set_default_options');
+add_action('admin_init', 'azrcrv_atc_set_default_options');
 
 // add actions
 add_action('admin_menu', 'azrcrv_atc_create_admin_menu');
@@ -99,7 +99,9 @@ function azrcrv_atc_set_default_options($networkwide){
 	$option_name = 'azrcrv-atc';
 	
 	$new_options = array(
-						'' => '',
+						'card_type' => 'summary',
+						'enable_author_twitter' => 1,
+						'updated' => strtotime('2020-04-04'),
 			);
 	
 	// set defaults for multi-site
@@ -142,17 +144,24 @@ function azrcrv_atc_update_options($option_name, $new_options, $is_network_site)
 		if (get_site_option($option_name) === false){
 			add_site_option($option_name, $new_options);
 		}else{
-			update_site_option($option_name, azrcrv_atc_update_default_options($new_options, get_site_option($option_name)));
+			$options = get_site_option($option_name);
+			if (!isset($options['updated']) OR $options['updated'] < $new_options['updated'] ){
+				$options['updated'] = $new_options['updated'];
+				update_site_option($option_name, azrcrv_atc_update_default_options($options, $new_options));
+			}
 		}
 	}else{
 		if (get_option($option_name) === false){
 			add_option($option_name, $new_options);
 		}else{
-			update_option($option_name, azrcrv_atc_update_default_options($new_options, get_option($option_name)));
+			$options = get_option($option_name);
+			if (!isset($options['updated']) OR $options['updated'] < $new_options['updated'] ){
+				$options['updated'] = $new_options['updated'];
+				update_option($option_name, azrcrv_atc_update_default_options($options, $new_options));
+			}
 		}
 	}
 }
-
 
 /**
  * Add default options to existing options.
@@ -165,14 +174,15 @@ function azrcrv_atc_update_default_options( &$default_options, $current_options 
     $current_options = (array) $current_options;
     $updated_options = $current_options;
     foreach ($default_options as $key => &$value) {
-        if (is_array( $value) && isset( $updated_options[$key ])){
-            $updated_options[$key] = azrcrv_atc_update_default_options($value, $updated_options[$key], true);
+        if (is_array( $value) && isset( $updated_options[$key])){
+            $updated_options[$key] = azrcrv_atc_update_default_options($value, $updated_options[$key]);
         } else {
-            $updated_options[$key] = $value;
+			$updated_options[$key] = $value;
         }
     }
     return $updated_options;
 }
+
 /**
  * Add pluginnameazrcrv-atc action link on plugins page.
  *
@@ -256,7 +266,7 @@ function azrcrv_atc_display_options(){
 				</td></tr>
 				
 				<tr><th scope="row"><label for="twitter"><?php esc_html_e('Twitter Username', 'add-twitter-cards'); ?></label></th><td>
-					<input type="text" name="twitter" value="<?php echo esc_html(stripslashes($options['twitter'])); ?>" class="small-text" />
+					<input type="text" name="twitter" value="<?php echo esc_html(stripslashes($options['twitter'])); ?>" class="regular-text" />
 					<p class="description"><?php esc_html_e('Site\'s Twitter Username', 'tag-cloud'); ?></p>
 				</td></tr>
 				

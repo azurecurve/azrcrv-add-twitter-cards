@@ -8,10 +8,11 @@ a.azrcrv-plugin-index{
 	color: #fff;
 	background: #007FFF;
 	width: 220px;
-	height: 125px;
-	line-height: 125px;
+	height: 75px;
+	line-height: 75px;
 	text-decoration: none; 
 	font-weight: 700;
+	border-radius: 5px;
 }
 a.azrcrv-plugin-index:hover{
 	text-decoration: underline; 
