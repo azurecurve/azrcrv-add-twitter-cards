@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.1.4
+ * Version: 1.1.5
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -402,8 +402,11 @@ function azrcrv_atc_insert_twittercard_tags() {
 				$counter += 1;
 				if ($counter == $image_count){
 					if ( preg_match( '`src=(["\'])(.*?)\1`', $image, $_match ) ) {
-						$imagetouse = $_match[2];
-						break;
+						list($width, $height) = getimagesize($_match[2]); 
+						if ($width > 100 || $height > 100){
+							$imagetouse = $_match[2];
+							break;
+						}
 					}
 				}
 			}
@@ -413,6 +416,7 @@ function azrcrv_atc_insert_twittercard_tags() {
 	if (STRLEN($imagetouse) == 0){
 		$imagetouse = $options['fallback_image'];
 	}
+	$imagetouse .= '?'.uniqid();
 	
 	// If on a post or page, reset defaults.
 	if( is_single() || is_page() ) {
@@ -445,7 +449,11 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$markup .= '<meta name="twitter:site" content="@'.str_replace( '@', '', esc_html($options['twitter'])).'" />' . "\n";
 	
 	// Add creator tag if author profile has a Twitter username.
-	$twitter = get_user_meta($post->post_author, 'azrcrv_atc_twitter', true);
+	if (isset($post)){
+		$twitter = get_user_meta($post->post_author, 'azrcrv_atc_twitter', true);
+	}else{
+		$twitter = $options['twitter'];
+	}
 	if ($card_type == 'summary_large_image' AND $twitter){
 		$markup .= '<meta name="twitter:creator" content="@'.str_replace('@', '', esc_html($twitter)).'" />'."\n";
 	}
