@@ -1,12 +1,12 @@
 === Add Twitter Cards ===
 
 Description:	Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
-Version:		1.1.5
+Version:		1.2.0
 Tags:			add-twitter-cards
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
-Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.1.5/azrcrv-add-twitter-cards.zip
+Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.2.0/azrcrv-add-twitter-cards.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -27,7 +27,7 @@ Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to y
 Options allow:
 * Card Types of Summary or Summary With Images.
 * Excerpt or first 200 characters of post added to card.
-* Thumbnail or first post image will be added to card.
+* Thumbnail or first post image will be added to card (subject to configurable minimum size.
 * Integrate with [Floating Featured Images](https:/development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/) for card image.
 
 This plugin is multisite compatible; each site will need settings to be configured in the admin dashboard.
@@ -54,6 +54,10 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 == Changelog ==
 
 # Changelog
+
+### [Version 1.2.0](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.2.0)
+ * Add plugin icon and banner.
+ * Add minimum dimensions for Twitter card image.
 
 ### [Version 1.1.5](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.1.5)
  * Fix bug with empty post array when getting twitter name.
@@ -111,5 +115,5 @@ Some of the top plugins available from **azurecurve** are:
 * [Breadcrumbs](https://development.azurecurve.co.uk/classicpress-plugins/breadcrumbs/)
 * [Series Index](https://development.azurecurve.co.uk/classicpress-plugins/series-index/)
 * [To Twitter](https://development.azurecurve.co.uk/classicpress-plugins/to-twitter/)
-* [Theme Switches](https://development.azurecurve.co.uk/classicpress-plugins/theme-switcher/)
+* [Theme Switcher](https://development.azurecurve.co.uk/classicpress-plugins/theme-switcher/)
 * [Toggle Show/Hide](https://development.azurecurve.co.uk/classicpress-plugins/toggle-showhide/)

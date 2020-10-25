@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.1.5
+ * Version: 1.2.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -48,6 +48,8 @@ add_action('plugins_loaded', 'azrcrv_atc_load_languages');
 
 // add filters
 add_filter('plugin_action_links', 'azrcrv_atc_add_plugin_action_link', 10, 2);
+add_filter('codepotent_update_manager_image_path', 'azrcrv_atc_custom_image_path');
+add_filter('codepotent_update_manager_image_url', 'azrcrv_atc_custom_image_url');
 
 /**
  * Load language files.
@@ -89,6 +91,32 @@ function azrcrv_atc_load_jquery($hook){
 }
 
 /**
+ * Custom plugin image path.
+ *
+ * @since 1.2.0
+ *
+ */
+function azrcrv_atc_custom_image_path($path){
+    if (strpos($path, 'azrcrv-add-twitter-card') !== false){
+        $path = plugin_dir_path(__FILE__).'assets/pluginimages';
+    }
+    return $path;
+}
+
+/**
+ * Custom plugin image url.
+ *
+ * @since 1.2.0
+ *
+ */
+function azrcrv_atc_custom_image_url($url){
+    if (strpos($url, 'azrcrv-add-twitter-card') !== false){
+        $url = plugin_dir_url(__FILE__).'assets/pluginimages';
+    }
+    return $url;
+}
+
+/**
  * Set default options for plugin.
  *
  * @since 1.0.0
@@ -101,7 +129,11 @@ function azrcrv_atc_set_default_options($networkwide){
 	$new_options = array(
 						'card_type' => 'summary',
 						'enable_author_twitter' => 1,
-						'updated' => strtotime('2020-04-04'),
+						'dimensions' => array(
+													'width' => 100,
+													'height' => 100,
+												),
+						'updated' => strtotime('2020-10-25'),
 			);
 	
 	// set defaults for multi-site
@@ -253,7 +285,7 @@ function azrcrv_atc_display_options(){
 				
 				<tr><th scope="row"><?php esc_html_e('Use floating featured image?', 'floating-featured-image'); ?></th><td>
 					<fieldset><legend class="screen-reader-text"><span>Use floating featured image</span></legend>
-					<label for="use_ffi"><input name="use_ffi" type="checkbox" id="use_ffi" value="1" <?php checked( '1', $options['use_ffi'] ); ?> /><?php esc_html_e('Use floating featured image in Twitter card?', 'floating-featured-image'); ?></label>
+					<label for="use_ffi"><input name="use_ffi" type="checkbox" id="use_ffi" value="1" <?php checked( '1', $options['use_ffi'] ); ?> /><?php esc_html_e('Use floating featured image in Twitter card?', 'add-twitter-cards'); ?></label>
 					</fieldset>
 				</td></tr>
 				
@@ -262,12 +294,17 @@ function azrcrv_atc_display_options(){
 						<option value="summary" <?php if($options['card_type'] == 'summary'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary', 'floating-featured-image'); ?></option>
 						<option value="summary_large_image" <?php if($options['card_type'] == 'summary_large_image'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary Large Image', 'floating-featured-image'); ?></option>
 					</select>
-					<p class="description"><?php esc_html_e('Select type of Twitter card.', 'floating-featured-image'); ?></p>
+					<p class="description"><?php esc_html_e('Select type of Twitter card.', 'add-twitter-cards'); ?></p>
 				</td></tr>
 				
 				<tr><th scope="row"><label for="twitter"><?php esc_html_e('Twitter Username', 'add-twitter-cards'); ?></label></th><td>
 					<input type="text" name="twitter" value="<?php echo esc_html(stripslashes($options['twitter'])); ?>" class="regular-text" />
-					<p class="description"><?php esc_html_e('Site\'s Twitter Username', 'tag-cloud'); ?></p>
+					<p class="description"><?php esc_html_e('Site\'s Twitter Username', 'add-twitter-cards'); ?></p>
+				</td></tr>
+				
+				<tr><th scope="row"><label for="dimensions"><?php esc_html_e('Minimum Dimensions', 'add-twitter-cards'); ?></label></th><td>
+					<input type="number" name="dimensions-width" value="<?php echo esc_html(stripslashes($options['dimensions']['width'])); ?>" class="small-text" />&nbsp;x&nbsp;<input type="number" name="dimensions-height" value="<?php echo esc_html(stripslashes($options['dimensions']['height'])); ?>" class="small-text" />
+					<p class="description"><?php esc_html_e('Specify minimum dimensions (width and height).', 'add-twitter-cards'); ?></p>
 				</td></tr>
 				
 				<tr><th scope="row"><label for="fallback_image"><?php esc_html_e('Fallback Image', 'add-twitter-cards'); ?></label></th><td>
@@ -328,6 +365,15 @@ function azrcrv_atc_save_options(){
 			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
 		}
 		
+		$option_name = 'dimensions-width';
+		if (isset($_POST[$option_name])){
+			$options['dimensions']['width'] = sanitize_text_field($_POST[$option_name]);
+		}
+		$option_name = 'dimensions-height';
+		if (isset($_POST[$option_name])){
+			$options['dimensions']['height'] = sanitize_text_field($_POST[$option_name]);
+		}
+		
 		$option_name = 'fallback_image';
 		if (isset($_POST[$option_name])){
 			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
@@ -374,7 +420,8 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$title = get_bloginfo( 'name' );
 	$desc  = get_bloginfo( 'description' );
 	
-	$options = get_option('azrcrv-atc');
+	$option_name = 'azrcrv-atc';
+	$options = get_option($option_name);
 	
 	$image_count = 0;
 	$imagetouse = '';
@@ -402,8 +449,9 @@ function azrcrv_atc_insert_twittercard_tags() {
 				$counter += 1;
 				if ($counter == $image_count){
 					if ( preg_match( '`src=(["\'])(.*?)\1`', $image, $_match ) ) {
-						list($width, $height) = getimagesize($_match[2]); 
-						if ($width > 100 || $height > 100){
+						
+						list($width, $height) = getimagesize($_match[2]);
+						if ($width >= $options['dimensions']['width'] || $height >= $options['dimensions']['height']){
 							$imagetouse = $_match[2];
 							break;
 						}
