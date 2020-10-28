@@ -216,6 +216,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_atc')){
 				'retired' => 0,
 				'updated' => '2020-04-04',
 			),
+			'Gallery From Folder' => array(
+				'plugin_link' => 'azrcrv-gallery-from-folder/azrcrv-gallery-from-folder.php',
+				'admin_URL' => 'admin.php?page=azrcrv-gff',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/gallery-from-folder/',
+				'retired' => 0,
+				'updated' => '2020-10-26',
+			),
 			'Icons' => array(
 				'plugin_link' => 'azrcrv-icons/azrcrv-icons.php',
 				'admin_URL' => 'admin.php?page=azrcrv-i',
@@ -260,6 +267,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_atc')){
 				'text' => 'Multisite Favicon',
 				'retired' => 0,
 				'updated' => '2020-04-04',
+			),
+			'Nearby' => array(
+				'plugin_link' => 'azrcrv-nearby/azrcrv-nearby.php',
+				'admin_URL' => 'admin.php?page=azrcrv-n',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/nearby/',
+				'retired' => 0,
+				'updated' => '2020-08-05',
 			),
 			'Page Index' => array(
 				'plugin_link' => 'azrcrv-page-index/azrcrv-page-index.php',
@@ -331,6 +345,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_atc')){
 				'retired' => 0,
 				'updated' => '2020-04-04',
 			),
+			'Snippets' => array(
+				'plugin_link' => 'azrcrv-snippets/azrcrv-snippets.php',
+				'admin_URL' => 'admin.php?page=azrcrv-s',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/snippets/',
+				'retired' => 0,
+				'updated' => '2020-10-28',
+			),
 			'Tag Cloud' => array(
 				'plugin_link' => 'azrcrv-tag-cloud/azrcrv-tag-cloud.php',
 				'admin_URL' => 'admin.php?page=azrcrv-tc',
@@ -344,6 +365,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_atc')){
 				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/taxonomy-index/',
 				'retired' => 0,
 				'updated' => '2020-04-04',
+			),
+			'Taxonomy Order' => array(
+				'plugin_link' => 'azrcrv-taxonomy-order/azrcrv-taxonomy-order.php',
+				'admin_URL' => 'admin.php?page=azrcrv-to',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/taxonomy-order/',
+				'retired' => 0,
+				'updated' => '2020-10-28',
 			),
 			'Theme Switcher' => array(
 				'plugin_link' => 'azrcrv-theme-switcher/azrcrv-theme-switcher.php',
