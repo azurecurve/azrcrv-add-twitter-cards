@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.3.0
+ * Version: 1.3.1
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -121,10 +121,6 @@ function azrcrv_atc_custom_image_url($url){
  *
  */
 function azrcrv_atc_get_option($option_name){
-	
-	$upload_dir = wp_upload_dir();
-
-	;
  
 	$defaults = array(
 						'card_type' => 'summary',
