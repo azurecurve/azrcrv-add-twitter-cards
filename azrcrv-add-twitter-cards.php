@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -207,16 +207,16 @@ function azrcrv_atc_display_options(){
 				<?php wp_nonce_field('azrcrv-atc', 'azrcrv-atc-nonce'); ?>
 				<table class="form-table">
 				
-				<tr><th scope="row"><?php esc_html_e('Use floating featured image?', 'floating-featured-image'); ?></th><td>
+				<tr><th scope="row"><?php esc_html_e('Use floating featured image?', 'add-twitter-cards'); ?></th><td>
 					<fieldset><legend class="screen-reader-text"><span>Use floating featured image</span></legend>
 					<label for="use_ffi"><input name="use_ffi" type="checkbox" id="use_ffi" value="1" <?php checked( '1', $options['use_ffi'] ); ?> /><?php esc_html_e('Use floating featured image in Twitter card?', 'add-twitter-cards'); ?></label>
 					</fieldset>
 				</td></tr>
 				
-				<tr><th scope="row"><label for="card_type"><?php esc_html_e('Card Type', 'floating-featured-image'); ?></label></th><td>
+				<tr><th scope="row"><label for="card_type"><?php esc_html_e('Card Type', 'add-twitter-cards'); ?></label></th><td>
 					<select name="card_type">
-						<option value="summary" <?php if($options['card_type'] == 'summary'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary', 'floating-featured-image'); ?></option>
-						<option value="summary_large_image" <?php if($options['card_type'] == 'summary_large_image'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary Large Image', 'floating-featured-image'); ?></option>
+						<option value="summary" <?php if($options['card_type'] == 'summary'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary', 'add-twitter-cards'); ?></option>
+						<option value="summary_large_image" <?php if($options['card_type'] == 'summary_large_image'){ echo ' selected="selected"'; } ?>><?php esc_html_e('Summary Large Image', 'add-twitter-cards'); ?></option>
 					</select>
 					<p class="description"><?php esc_html_e('Select type of Twitter card.', 'add-twitter-cards'); ?></p>
 				</td></tr>
@@ -241,9 +241,9 @@ function azrcrv_atc_display_options(){
 					<span class="description"><?php esc_html_e( 'Upload, choose or remove your profile picture; save your profile to add-twitter-cards the change.', 'add-twitter-cards' ); ?></span>
 				</td></tr>
 				
-				<tr><th scope="row"><?php esc_html_e('Enable Author Twitter?', 'floating-featured-image'); ?></th><td>
+				<tr><th scope="row"><?php esc_html_e('Enable Author Twitter?', 'add-twitter-cards'); ?></th><td>
 					<fieldset><legend class="screen-reader-text"><span>Enable Author Twitter</span></legend>
-					<label for="enable_author_twitter"><input name="enable_author_twitter" type="checkbox" id="enable_author_twitter" value="1" <?php checked( '1', $options['enable_author_twitter'] ); ?> /><?php esc_html_e('Enable Author Twitter on user profiles; used to add Content Creator to Twitter card.', 'floating-featured-image'); ?></label>
+					<label for="enable_author_twitter"><input name="enable_author_twitter" type="checkbox" id="enable_author_twitter" value="1" <?php checked( '1', $options['enable_author_twitter'] ); ?> /><?php esc_html_e('Enable Author Twitter on user profiles; used to add Content Creator to Twitter card.', 'add-twitter-cards'); ?></label>
 					</fieldset>
 				</td></tr>
 				
