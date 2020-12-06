@@ -133,11 +133,32 @@ function azrcrv_atc_get_option($option_name){
 
 	$options = get_option($option_name, $defaults);
 
-	$options = wp_parse_args($options, $defaults);
+	$options = azrcrv_atc_recursive_parse_args($options, $defaults);
 
 	return $options;
 
  }
+
+/**
+ * Recursively parse options to merge with defaults.
+ *
+ * @since 1.13.0
+ *
+ */
+function azrcrv_atc_recursive_parse_args( $args, $defaults ) {
+	$new_args = (array) $defaults;
+
+	foreach ( $args as $key => $value ) {
+		if ( is_array( $value ) && isset( $new_args[ $key ] ) ) {
+			$new_args[ $key ] = azrcrv_e_recursive_parse_args( $value, $new_args[ $key ] );
+		}
+		else {
+			$new_args[ $key ] = $value;
+		}
+	}
+
+	return $new_args;
+}
 
 /**
  * Add pluginnameazrcrv-atc action link on plugins page.

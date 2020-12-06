@@ -1,12 +1,12 @@
 === Add Twitter Cards ===
 
 Description:	Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
-Version:		1.3.2
+Version:		1.3.3
 Tags:			add-twitter-cards
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
-Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.3.2/azrcrv-add-twitter-cards.zip
+Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.3.3/azrcrv-add-twitter-cards.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -54,6 +54,9 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 == Changelog ==
 
 # Changelog
+
+### [Version 1.3.3](https://github.com/azurecurve/azrcrv-add-open-graph-tags/releases/tag/v1.3.3)
+ * Fix bug with population of default options.
 
 ### [Version 1.3.2](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.3.2)
  * Fix bug with incorrect language domain.
