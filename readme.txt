@@ -1,12 +1,12 @@
 === Add Twitter Cards ===
 
 Description:	Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
-Version:		1.3.4
+Version:		1.4.0
 Tags:			add-twitter-cards
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
-Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.3.4/azrcrv-add-twitter-cards.zip
+Download link:	https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/download/v1.4.0/azrcrv-add-twitter-cards.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -27,7 +27,7 @@ Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to y
 Options allow:
 * Card Types of Summary or Summary With Images.
 * Excerpt or first 200 characters of post added to card.
-* Thumbnail or first post image will be added to card (subject to configurable minimum size.
+* Featured Image or first post image will be added to card (subject to configurable minimum size).
 * Integrate with [Floating Featured Images](https:/development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/) for card image.
 
 This plugin is multisite compatible; each site will need settings to be configured in the admin dashboard.
@@ -55,11 +55,17 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 
 # Changelog
 
-### [Version 1.3.4](https://github.com/azurecurve/azrcrv-add-open-graph-tags/releases/tag/v1.3.4)
+### [Version 1.4.0](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.4.0)
+ * Add option to use featured image if one set, otherwise use existing functionality.
+ * Fix bug with missing minimum image size check.
+ * Fix bug with population of default options causing whitescreen.
+ * Disable Use FFI option if [Floating Featured Image](https://development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/) by [azurecurve](https://development.azurecurve.co.uk/) is not installed and active.
+
+### [Version 1.3.4](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.3.4)
  * Fix bug with missing default options.
  * Update azurecurve menu.
 
-### [Version 1.3.3](https://github.com/azurecurve/azrcrv-add-open-graph-tags/releases/tag/v1.3.3)
+### [Version 1.3.3](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.3.3)
  * Fix bug with population of default options.
 
 ### [Version 1.3.2](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v1.3.2)

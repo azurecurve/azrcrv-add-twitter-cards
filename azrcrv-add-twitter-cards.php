@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.3.4
+ * Version: 1.4.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -123,6 +123,7 @@ function azrcrv_atc_custom_image_url($url){
 function azrcrv_atc_get_option($option_name){
  
 	$defaults = array(
+						'use_featured_image' => 0,
 						'use_ffi' => 0,
 						'card_type' => 'summary',
 						'enable_author_twitter' => 1,
@@ -153,7 +154,7 @@ function azrcrv_atc_recursive_parse_args( $args, $defaults ) {
 
 	foreach ( $args as $key => $value ) {
 		if ( is_array( $value ) && isset( $new_args[ $key ] ) ) {
-			$new_args[ $key ] = azrcrv_e_recursive_parse_args( $value, $new_args[ $key ] );
+			$new_args[ $key ] = azrcrv_atc_recursive_parse_args( $value, $new_args[ $key ] );
 		}
 		else {
 			$new_args[ $key ] = $value;
@@ -177,7 +178,7 @@ function azrcrv_atc_add_plugin_action_link($links, $file){
 	}
 
 	if ($file == $this_plugin){
-		$settings_link = '<a href="'.admin_url('admin.php?page=azrcrv-atc').'"><img src="'.plugins_url('/pluginmenu/images/Favicon-16x16.png', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'add-twitter-cards').'</a>';
+		$settings_link = '<a href="'.admin_url('admin.php?page=azrcrv-atc').'"><img src="'.plugins_url('/pluginmenu/images/logo.svg', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'add-twitter-cards').'</a>';
 		array_unshift($links, $settings_link);
 	}
 
@@ -225,15 +226,25 @@ function azrcrv_atc_display_options(){
 			<?php } ?>
 			<form method="post" action="admin-post.php">
 				<input type="hidden" name="action" value="azrcrv_atc_save_options" />
-				<input name="page_options" type="hidden" value="min_length,max_length,mod_length,use_network" />
+				<input name="page_options" type="hidden" value="use_ffi,use_featured_image,fallback_image,twitter" />
 				
 				<!-- Adding security through hidden referrer field -->
 				<?php wp_nonce_field('azrcrv-atc', 'azrcrv-atc-nonce'); ?>
 				<table class="form-table">
 				
+				<tr><th scope="row"><?php esc_html_e('Use featured image?', 'add-twitter-cards'); ?></th><td>
+					<fieldset><legend class="screen-reader-text"><span>Use featured image</span></legend>
+					<label for="use_featured_image"><input name="use_featured_image" type="checkbox" id="use_featured_image" value="1" <?php checked( '1', $options['use_featured_image'] ); ?> /><?php esc_html_e('Use featured image in Twitter card?', 'twitter-card'); ?></label>
+					</fieldset>
+				</td></tr>
+				
 				<tr><th scope="row"><?php esc_html_e('Use floating featured image?', 'add-twitter-cards'); ?></th><td>
 					<fieldset><legend class="screen-reader-text"><span>Use floating featured image</span></legend>
-					<label for="use_ffi"><input name="use_ffi" type="checkbox" id="use_ffi" value="1" <?php checked( '1', $options['use_ffi'] ); ?> /><?php esc_html_e('Use floating featured image in Twitter card?', 'add-twitter-cards'); ?></label>
+					<?php if (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php')){ ?>
+						<label for="use_ffi"><input name="use_ffi" type="checkbox" id="use_ffi" value="1" <?php checked( '1', $options['use_ffi'] ); ?> /><?php esc_html_e('Use floating featured image in Twitter card?', 'add-twitter-cards'); ?></label>
+					<?php }else{ ?>
+						<label for="use_ffi"><?php printf(__('%s from %s is not installed', 'add-twitter-cards'), '<a href="https://development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/">Floating Featured Image</a>', '<a href="https://development.azurecurve.co.uk/">azurecurve</a>'); ?></label>
+					<?php } ?>
 					</fieldset>
 				</td></tr>
 				
@@ -276,6 +287,25 @@ function azrcrv_atc_display_options(){
 			</form>
 		</fieldset>
 	</div>
+	
+	<div>
+		<p>
+			<label for="additional-plugins">
+				<?php printf(esc_html__('This plugin integrates with the following plugins from %s:', 'add-twitter-cards'), '<a href="https://development.azurecurve.co.uk/classicpress-plugins/">azurecurve</a>'); ?>
+			</label>
+			<ul class='azrcrv-plugin-index'>
+				<li>
+					<?php
+					if (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php')){
+						echo '<a href="admin.php?page=azrcrv-ffi" class="azrcrv-plugin-index">Floating Featured Image</a>';
+					}else{
+						echo '<a href="https://development.azurecurve.co.uk/classicpress-plugins/floating-featured-image/" class="azrcrv-plugin-index">Floating Featured Image</a>';
+					}
+					?>
+				</li>
+			</ul>
+		</p>
+	</div>
 	<?php
 }
 
@@ -297,6 +327,13 @@ function azrcrv_atc_save_options(){
 		$options = get_option('azrcrv-atc');
 		
 		$option_name = 'use_ffi';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = 1;
+		}else{
+			$options[$option_name] = 0;
+		}
+		
+		$option_name = 'use_featured_image';
 		if (isset($_POST[$option_name])){
 			$options[$option_name] = 1;
 		}else{
@@ -376,9 +413,9 @@ function azrcrv_atc_insert_twittercard_tags() {
 	if (!is_singular()){
 		$imagetouse = $options['fallback_image'];
 		$image_count = 0;
-	/*}elseif ($options['use_thumbnail'] == 1 AND has_post_thumbnail()){
-		$image_properties = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) , 'medium_large' );
-		$imagetouse = $image_properties[0];*/
+	}elseif ($options['use_featured_image'] == 1 AND has_post_thumbnail()){
+		$imagetouse = get_the_post_thumbnail_url($post->ID, 'full');
+		$image_count = 0;
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 1){
 		$image_count = 1;
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == true){
@@ -412,6 +449,14 @@ function azrcrv_atc_insert_twittercard_tags() {
 	if (strlen($imagetouse) == 0){
 		$imagetouse = $options['fallback_image'];
 	}
+	
+	if (strlen($imagetouse) > 0){
+		list($width, $height) = getimagesize($imagetouse);
+		if ($width < $options['dimensions']['width'] || $height < $options['dimensions']['height']){
+			$imagetouse = $options['fallback_image'];
+		}
+	}
+	
 	$imagetouse .= '?'.uniqid();
 	
 	// If on a post or page, reset defaults.
