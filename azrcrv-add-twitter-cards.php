@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Add Twitter Cards
  * Description: Add Twitter Cards to attach rich photos to Tweets, helping to drive traffic to your website.
- * Version: 1.4.1
+ * Version: 1.4.2
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/
@@ -410,6 +410,8 @@ function azrcrv_atc_insert_twittercard_tags() {
 	$title = get_bloginfo( 'name' );
 	$desc  = get_bloginfo( 'description' );
 	
+	$content = $post->post_content;
+	
 	$option_name = 'azrcrv-atc';
 	$options = azrcrv_atc_get_option($option_name);
 	
@@ -423,9 +425,9 @@ function azrcrv_atc_insert_twittercard_tags() {
 		$image_count = 0;
 	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 1){
 		$image_count = 1;
-	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == true){
+	}elseif (azrcrv_atc_is_plugin_active('azrcrv-floating-featured-image/azrcrv-floating-featured-image.php') AND $options['use_ffi'] == 0 AND strpos($content, 'featured-image') == true){
 		$image_count = 2;
-	}elseif ($options['use_ffi'] == 0 AND strpos($post->post_content, 'featured-image') == false){
+	}elseif ($options['use_ffi'] == 0 AND strpos($content, 'featured-image') == false){
 		$image_count = 1;
 	}else{
 		$image_count = 1;
@@ -433,7 +435,7 @@ function azrcrv_atc_insert_twittercard_tags() {
 	
 	if ($image_count > 0){
 		$counter = 0;
-		if ( preg_match_all( '/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s',  do_shortcode($post->post_content), $matches ) ) {
+		if ( preg_match_all( '/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s',  do_shortcode($content), $matches ) ) {
 			$_matches = reset( $matches );
 			foreach ( $_matches as $image ) {
 				$counter += 1;
@@ -474,7 +476,7 @@ function azrcrv_atc_insert_twittercard_tags() {
 		if (!empty( $post->post_excerpt)){
 			$desc = $post->post_excerpt;
 		}else{
-			$desc = trim(strip_tags(do_shortcode($post->post_content)));
+			$desc = trim(strip_tags(do_shortcode($content)));
 			if (strlen($desc) > 200){
 				$desc = substr($desc, 0 , 199).'‎&hellip;';
 			}
@@ -522,4 +524,3 @@ function azrcrv_atc_add_twitter($profile_fields) {
 }
 add_filter('user_contactmethods', 'azrcrv_atc_add_twitter');
 
-?>

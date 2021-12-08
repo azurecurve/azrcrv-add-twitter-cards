@@ -10,10 +10,10 @@ a.azrcrv-plugin-index{
 	width: 220px;
 	height: 75px;
 	line-height: 75px;
-	text-decoration: none; 
+	text-decoration: none;
 	font-weight: 700;
 	border-radius: 5px;
 }
 a.azrcrv-plugin-index:hover{
-	text-decoration: underline; 
+	text-decoration: underline;
 }
