@@ -16,7 +16,7 @@ if ( ! function_exists( 'azrcrv_add_plugin_menu' ) ) {
 	function azrcrv_add_plugin_menu() {
 		global $admin_page_hooks;
 
-		if ( empty( $admin_page_hooks['azrcrv-menu-test'] ) ) {
+		if ( empty( $admin_page_hooks['azrcrv-plugin-menu'] ) ) {
 			add_menu_page(
 				'azurecurve Plugins',
 				'azurecurve',
