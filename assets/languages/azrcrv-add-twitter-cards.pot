@@ -1,0 +1,245 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Twitter Cards\n"
+"POT-Creation-Date: 2022-08-08 18:16+0100\n"
+"PO-Revision-Date: 2019-03-24 10:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: translate@azurecurve.co.uk\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/azurecurve-menu-display.php:55
+msgid "Active Plugins"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:87
+#: includes/tab-other-plugins.php:41
+#, php-format
+msgid ""
+"%1$s was one of the first plugin developers to start developing for "
+"ClassicPress; all plugins are available from %2$s and are integrated "
+"with the %3$s plugin for fully integrated, no hassle, updates."
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:90
+#, php-format
+msgid "The %s plugins active on your site are:"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:109
+msgid "Other Available Plugins"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:135
+#, php-format
+msgid "Congratulations! You're using all of the %s plugins."
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:147
+#, php-format
+msgid "The other plugins available from %s are:"
+msgstr ""
+
+#: includes/azurecurve-menu-tabs-output.php:50
+#, php-format
+msgid "%s Support"
+msgstr ""
+
+#: includes/azurecurve-menu-tabs-output.php:61
+#: includes/tabs-output.php:106
+msgid ""
+"You can help support the development of our free plugins by donating a "
+"small amount of money."
+msgstr ""
+
+#: includes/functions-menu.php:23 includes/functions-menu.php:39
+#: includes/tab-settings.php:15
+msgid "Settings"
+msgstr ""
+
+#: includes/functions-settings.php:65
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/functions-settings.php:81
+msgid "Settings have been saved."
+msgstr ""
+
+#: includes/functions-settings.php:103
+msgid "You do not have permissions to perform this action"
+msgstr ""
+
+#: includes/tab-instructions.php:15
+msgid "Instructions"
+msgstr ""
+
+#: includes/tab-instructions.php:23
+msgid "Add Twitter Cards"
+msgstr ""
+
+#: includes/tab-instructions.php:35
+msgid ""
+"This plugin allows you to attach rich photos to Tweets, helping to "
+"drive traffic to your website."
+msgstr ""
+
+#: includes/tab-instructions.php:40
+#, php-format
+msgid ""
+"This %s plugin will allow you to choose between summary and summary "
+"large image card types and add them to every page using an image from "
+"the page content, featured image or a fall back image specified on the "
+"Settings tab."
+msgstr ""
+
+#: includes/tab-other-plugins.php:32
+msgid "Other Plugins"
+msgstr ""
+
+#: includes/tab-other-plugins.php:52
+msgid "Integrated Plugins"
+msgstr ""
+
+#: includes/tab-other-plugins.php:78
+#, php-format
+msgid "%1$s integrates with the following plugins from %2$s:"
+msgstr ""
+
+#: includes/tab-other-plugins.php:96
+msgid "Complimentary Plugins"
+msgstr ""
+
+#: includes/tab-other-plugins.php:108
+#, php-format
+msgid "The below plugin from %1$s compliments %2$s:"
+msgstr ""
+
+#: includes/tab-other-plugins.php:126
+msgid "Available Plugins"
+msgstr ""
+
+#: includes/tab-other-plugins.php:137
+#, php-format
+msgid "Other plugins available from %s, which you are not using, are:"
+msgstr ""
+
+#: includes/tab-settings.php:24
+#, php-format
+msgid ""
+"%s allow you to attach rich photos to Tweets, helping to drive traffic "
+"to your website."
+msgstr ""
+
+#: includes/tab-settings.php:35 includes/tab-settings.php:42
+msgid "Use featured image?"
+msgstr ""
+
+#: includes/tab-settings.php:48
+msgid "Use featured image set on the post."
+msgstr ""
+
+#: includes/tab-settings.php:60 includes/tab-settings.php:67
+msgid "Use floating featured image?"
+msgstr ""
+
+#: includes/tab-settings.php:76
+msgid "Use floating featured image if available in the post."
+msgstr ""
+
+#: includes/tab-settings.php:82
+#, php-format
+msgid "%1$s from %2$s is not installed"
+msgstr ""
+
+#: includes/tab-settings.php:94
+msgid "Card Type"
+msgstr ""
+
+#: includes/tab-settings.php:103
+msgid "Summary"
+msgstr ""
+
+#: includes/tab-settings.php:107
+msgid "Summary Large Image"
+msgstr ""
+
+#: includes/tab-settings.php:113
+msgid "Select type of Twitter card."
+msgstr ""
+
+#: includes/tab-settings.php:124
+msgid "Twitter Username"
+msgstr ""
+
+#: includes/tab-settings.php:133
+msgid "Site's Twitter Username"
+msgstr ""
+
+#: includes/tab-settings.php:142
+msgid "Minimum Dimensions"
+msgstr ""
+
+#: includes/tab-settings.php:151
+msgid "Specify minimum dimensions (width and height)."
+msgstr ""
+
+#: includes/tab-settings.php:161
+msgid "Fallback Image"
+msgstr ""
+
+#: includes/tab-settings.php:174
+msgid "Upload image"
+msgstr ""
+
+#: includes/tab-settings.php:175
+msgid "Remove image"
+msgstr ""
+
+#: includes/tab-settings.php:180
+msgid ""
+"Upload, choose or remove your fallback image; recommended open graph "
+"image is 1200px by 627px."
+msgstr ""
+
+#: includes/tab-settings.php:189
+msgid "Enable Author Twitter?"
+msgstr ""
+
+#: includes/tab-settings.php:196
+msgid ""
+"Enable Author Twitter on user profiles; used to add Content Creator to "
+"Twitter card."
+msgstr ""
+
+#: includes/tabs-output.php:85
+msgid "Save Settings"
+msgstr ""
+
+#: includes/tabs-output.php:96
+#, php-format
+msgid "Support %s"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Compatible up to:"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Reviews"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Read all reviews"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:381
+msgid "View details"
+msgstr ""

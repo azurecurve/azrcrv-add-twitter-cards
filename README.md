@@ -1,5 +1,5 @@
 # [Add Twitter Cards](https://development.azurecurve.co.uk/classicpress-plugins/add-twitter-cards/)
-![Plugin Banner](/assets/pluginimages/banner-1544x500.png)
+![Plugin Banner](/assets/images/banner-1544x500.png)
 
 # Description
 

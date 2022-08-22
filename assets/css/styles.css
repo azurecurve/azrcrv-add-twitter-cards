@@ -1,0 +1,45 @@
+/*
+	BBCode styles
+*/
+span.azrcrv-bbc-bold{
+	font-weight: 900;
+}
+span.azrcrv-bbc-italic{
+	font-style: italic;
+}
+span.azrcrv-bbc-underline{
+	text-decoration: underline;
+}
+span.azrcrv-bbc-strike{
+	text-decoration: line-through;
+}
+ul.azrcrv-bbc-ul{
+}
+ol.azrcrv-bbc-ol{
+}
+li.azrcrv-bbc-li{
+}
+table.azrcrv-bbc-table{
+}
+tr.azrcrv-bbc-tr{
+}
+th.azrcrv-bbc-th{
+}
+td.azrcrv-bbc-td{
+}
+a.azrcrv-bbc-url{
+}
+blockquote.azrcrv-bbc-quote{
+}
+div.azrcrv-bbc-quote{
+}
+pre.azrcrv-bbc-code{
+}
+code.azrcrv-bbc-code{
+}
+img.azrcrv-bbc-image{
+}
+img.azrcrv-bbc-center{
+}
+img.azrcrv-bbc-img{
+}
