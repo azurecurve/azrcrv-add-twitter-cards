@@ -37,6 +37,9 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 
 # Changelog
 
+### [Version 2.0.5](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v2.0.5)
+ * Update plugin header for compatibility with ClasssicPress v2.
+
 ### [Version 2.0.4](https://github.com/azurecurve/azrcrv-add-twitter-cards/releases/tag/v2.0.4)
  * New version to fix version issue.
 
